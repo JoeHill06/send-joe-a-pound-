@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Platform } from "react-native";
 import Clipboard from '@react-native-clipboard/clipboard';
 
 export default function Contact({ type, text, onPress }) {
@@ -26,8 +26,26 @@ export default function Contact({ type, text, onPress }) {
 
   const handlePress = async () => {
     try {
-      await Clipboard.setString(text);
-      Alert.alert("Copied!", `${text} has been copied to your clipboard! 📋`);
+      if (Platform.OS === 'web') {
+        // For web, use navigator.clipboard API
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          Alert.alert("Copied!", `${text} has been copied to your clipboard! 📋`);
+        } else {
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          Alert.alert("Copied!", `${text} has been copied to your clipboard! 📋`);
+        }
+      } else {
+        // For mobile, use React Native clipboard
+        await Clipboard.setString(text);
+        Alert.alert("Copied!", `${text} has been copied to your clipboard! 📋`);
+      }
     } catch (error) {
       Alert.alert("Error", "Could not copy to clipboard");
     }

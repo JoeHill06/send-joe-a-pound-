@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, Alert, Linking } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Alert, Linking, Platform } from "react-native";
 import { useState } from "react";
 import HeroSection from "../../components/HeroSection";
 import Service from "../../components/ServicesSection";
@@ -7,7 +7,15 @@ import PleaSection from "../../components/PleaSection";
 import Contact from "../../components/ContactSection";
 
 const openStripePayment = () => {
-  Linking.openURL("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00");
+  const url = "https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00";
+  
+  if (Platform.OS === 'web') {
+    // For web, use window.open for better compatibility
+    window.open(url, '_blank');
+  } else {
+    // For mobile, use Linking
+    Linking.openURL(url);
+  }
 };
 
 export default function Index() {
