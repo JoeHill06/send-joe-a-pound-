@@ -1,12 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import DonationButton from "./DonationButton";
 
 export default function PleaSection({ 
   title = "The Plea", 
   mainText, 
   subText, 
-  buttonText = "💰 SEND JOE A POUND 💰",
-  gratitudeText,
-  onButtonPress 
+  gratitudeText
 }) {
   return (
     <View style={styles.pleaSection}>
@@ -14,9 +13,7 @@ export default function PleaSection({
       <Text style={styles.pleaText}>{mainText}</Text>
       <Text style={styles.pleaSubtext}>{subText}</Text>
       
-      <TouchableOpacity style={styles.donateButton} onPress={onButtonPress}>
-        <Text style={styles.donateButtonText}>{buttonText}</Text>
-      </TouchableOpacity>
+      <DonationButton text="💰 SEND JOE A POUND 💰" backgroundColor="#ff6b35" marginTop={30} />
       
       <Text style={styles.gratitude}>{gratitudeText}</Text>
     </View>
@@ -49,24 +46,6 @@ const styles = StyleSheet.create({
     color: "#6c757d",
     textAlign: "center",
     marginBottom: 30,
-  },
-  donateButton: {
-    backgroundColor: "#ff6b35",
-    paddingHorizontal: 40,
-    paddingVertical: 18,
-    borderRadius: 30,
-    marginBottom: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
-  },
-  donateButtonText: {
-    color: "#ffffff",
-    fontSize: 18,
-    fontWeight: "800",
-    textAlign: "center",
   },
   gratitude: {
     fontSize: 14,

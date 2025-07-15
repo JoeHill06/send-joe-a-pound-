@@ -1,12 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import DonationButton from "./DonationButton";
 
 export default function HeroSection({ 
   greeting = "Hello! I'm", 
   name = "Joe Hill", 
   subtitle, 
-  description, 
-  buttonText = "SEND £1",
-  onButtonPress 
+  description
 }) {
   return (
     <View style={styles.hero}>
@@ -16,9 +15,7 @@ export default function HeroSection({
         <Text style={styles.subtitle}>{subtitle}</Text>
         <Text style={styles.description}>{description}</Text>
         
-        <TouchableOpacity style={styles.primaryButton} onPress={onButtonPress}>
-          <Text style={styles.primaryButtonText}>{buttonText}</Text>
-        </TouchableOpacity>
+        <DonationButton text="SEND £1" backgroundColor="#ff6b35" marginTop={30} />
       </View>
       
       {/* Geometric Shape */}
@@ -68,18 +65,6 @@ const styles = StyleSheet.create({
     color: "#6c757d",
     lineHeight: 24,
     marginBottom: 30,
-  },
-  primaryButton: {
-    backgroundColor: "#ff6b35",
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 8,
-    alignSelf: "flex-start",
-  },
-  primaryButtonText: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "700",
   },
   heroShape: {
     width: 200,
