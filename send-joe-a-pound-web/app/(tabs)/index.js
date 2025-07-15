@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, Alert } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Alert, Linking } from "react-native";
 import { useState } from "react";
 import HeroSection from "../../components/HeroSection";
 import Service from "../../components/ServicesSection";
@@ -6,6 +6,9 @@ import Stat from "../../components/StatsSection";
 import PleaSection from "../../components/PleaSection";
 import Contact from "../../components/ContactSection";
 
+const openStripePayment = () => {
+  Linking.openURL("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00");
+};
 
 export default function Index() {
   const handleDonatePress = () => {
