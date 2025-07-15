@@ -2,6 +2,7 @@ import { Platform, Image } from 'react-native';
 
 export default function ContactLink({ name, imageSource, url }) {
   if (Platform.OS === 'web') {
+    const isExtraSmall = typeof window !== 'undefined' && window.innerWidth < 400;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     
     return (
@@ -10,7 +11,7 @@ export default function ContactLink({ name, imageSource, url }) {
         target="_blank"
         rel="noopener noreferrer"
         style={{
-          fontSize: isMobile ? '16px' : '18px',
+          fontSize: isExtraSmall ? '14px' : (isMobile ? '16px' : '18px'),
           color: '#1e90ff',
           marginBottom: '10px',
           fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
@@ -23,8 +24,8 @@ export default function ContactLink({ name, imageSource, url }) {
         <Image 
           source={imageSource}
           style={{
-            width: isMobile ? 20 : 24,
-            height: isMobile ? 20 : 24,
+            width: isExtraSmall ? 18 : (isMobile ? 20 : 24),
+            height: isExtraSmall ? 18 : (isMobile ? 20 : 24),
             objectFit: 'contain'
           }}
         />

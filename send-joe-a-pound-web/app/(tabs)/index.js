@@ -1,9 +1,11 @@
 import { ScrollView, View, Text, StyleSheet, Linking, Platform, TouchableOpacity } from "react-native";
+import { Stack } from "expo-router";
 import HeroSection from "../../components/HeroSection";
 import Service from "../../components/ServicesSection";
 import Stat from "../../components/StatsSection";
 import PleaSection from "../../components/PleaSection";
 import ContactLink from "../../components/ContactLink";
+
 
 const openLink = (url) => {
   if (Platform.OS === 'web') {
@@ -16,7 +18,9 @@ const openLink = (url) => {
 export default function Index() {
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <>
+      <Stack.Screen options={{ headerShown: false }} />
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       
       <HeroSection 
         subtitle="A broke software engineer enjoying summer holidays"
@@ -86,6 +90,7 @@ export default function Index() {
       
 
     </ScrollView>
+    </>
   );
 }
 
@@ -96,14 +101,14 @@ const styles = StyleSheet.create({
   },
   servicesSection: {
     backgroundColor: "#ffffff",
-    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
+    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 12 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40),
     marginTop: 2,
   },
   sectionTitle: {
-    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 20 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32),
     fontWeight: "800",
     color: "#212529",
-    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
+    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 16 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40),
     textAlign: "center",
   },
   servicesGrid: {
@@ -113,17 +118,17 @@ const styles = StyleSheet.create({
   },
   statsSection: {
     backgroundColor: "#212529",
-    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
+    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 12 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40),
     marginTop: 2,
   },
   statsContent: {
     alignItems: "center",
   },
   statsTitle: {
-    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 20 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32),
     fontWeight: "800",
     color: "#ffffff",
-    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
+    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 16 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40),
     textAlign: "center",
   },
   statsGrid: {
@@ -135,12 +140,12 @@ const styles = StyleSheet.create({
   },
   contactSection: {
     backgroundColor: "#ffffff",
-    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
+    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 12 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40),
     marginTop: 2,
     alignItems: "center",
   },
   contactTitle: {
-    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 20 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32),
     fontWeight: "800",
     color: "#212529",
     marginBottom: 10,

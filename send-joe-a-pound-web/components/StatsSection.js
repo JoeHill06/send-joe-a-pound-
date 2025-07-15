@@ -12,20 +12,20 @@ export default function Stat({ number, label }) {
 const styles = StyleSheet.create({
   statItem: {
     alignItems: "center",
-    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 20,
+    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 12 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 20),
     width: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "100%" : "45%",
-    paddingHorizontal: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 10 : 0,
+    paddingHorizontal: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 5 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 10 : 0),
   },
   statNumber: {
-    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 28 : 36,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 24 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 28 : 36),
     fontWeight: "900",
     color: "#ff6b35",
     marginBottom: 8,
   },
   statLabel: {
-    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 12 : 14,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 10 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 12 : 14),
     color: "#adb5bd",
     textAlign: "center",
-    lineHeight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 18,
+    lineHeight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 400 ? 14 : (Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 18),
   },
 });
