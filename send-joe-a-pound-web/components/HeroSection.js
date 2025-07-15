@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import DonationButton from "./DonationButton";
+import PhotoTile from "./PhotoTile";
 
 export default function HeroSection({ 
   greeting = "Hello! I'm", 
@@ -18,12 +19,15 @@ export default function HeroSection({
         <DonationButton text="SEND £1" backgroundColor="#ff6b35" marginTop={30} />
       </View>
       
-      {/* Geometric Shape */}
+      {/* Photo Tile */}
       <View style={styles.heroShape}>
-        <View style={styles.photoPlaceholder}>
-          <Text style={styles.photoPlaceholderText}>📸</Text>
-          <Text style={styles.photoPlaceholderSubtext}>Your photo here</Text>
-        </View>
+        <PhotoTile 
+          name=""
+          description=""
+          imageSource={require("../assets/images/profile_image.png")}
+          backgroundColor="transparent"
+          isHeroPhoto={true}
+        />
       </View>
     </View>
   );
@@ -32,63 +36,50 @@ export default function HeroSection({
 const styles = StyleSheet.create({
   hero: {
     backgroundColor: "#ffffff",
-    paddingHorizontal: 20,
-    paddingVertical: 60,
-    flexDirection: "row",
+    paddingHorizontal: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 20,
+    paddingVertical: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 30 : 60,
+    flexDirection: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "column" : "row",
     alignItems: "center",
-    minHeight: 500,
+    minHeight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 400 : 500,
   },
   heroContent: {
     flex: 1,
-    paddingRight: 20,
+    paddingRight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : 20,
+    alignItems: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "flex-start",
+    textAlign: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "left",
   },
   greeting: {
-    fontSize: 18,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 18,
     color: "#6c757d",
     marginBottom: 5,
+    textAlign: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "left",
   },
   name: {
-    fontSize: 48,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 32 : 48,
     fontWeight: "900",
     color: "#212529",
     marginBottom: 10,
-    lineHeight: 52,
+    lineHeight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 36 : 52,
+    textAlign: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "left",
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 18 : 20,
     color: "#495057",
     marginBottom: 20,
-    lineHeight: 26,
+    lineHeight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 22 : 26,
+    textAlign: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "left",
   },
   description: {
-    fontSize: 16,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 14 : 16,
     color: "#6c757d",
-    lineHeight: 24,
+    lineHeight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 24,
     marginBottom: 30,
+    textAlign: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "left",
   },
   heroShape: {
-    width: 200,
-    height: 200,
+    width: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 120 : 200,
+    height: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 120 : 200,
     position: "relative",
-  },
-  photoPlaceholder: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: "#e9ecef",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 3,
-    borderColor: "#ff6b35",
-    borderStyle: "dashed",
-  },
-  photoPlaceholderText: {
-    fontSize: 32,
-  },
-  photoPlaceholderSubtext: {
-    fontSize: 12,
-    color: "#6c757d",
-    textAlign: "center",
-    marginTop: 5,
+    marginTop: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 0,
   },
 });

@@ -15,6 +15,7 @@ const DonationButton = ({
   };
 
   if (Platform.OS === 'web') {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     return (
       <a
         href={url}
@@ -23,11 +24,12 @@ const DonationButton = ({
         style={{
           backgroundColor: backgroundColor,
           color: textColor,
-          padding: '16px 32px',
+          padding: isMobile ? '12px 24px' : '16px 32px',
           borderRadius: '10px',
           marginTop: marginTop,
           border: 'none',
-          fontSize: '20px',
+          fontSize: isMobile ? '16px' : '20px',
+          fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
           fontWeight: 'bold',
           cursor: 'pointer',
           textDecoration: 'none',

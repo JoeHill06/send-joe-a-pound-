@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 
 export default function Service({ icon, title, description }) {
   return (
@@ -12,27 +12,28 @@ export default function Service({ icon, title, description }) {
 
 const styles = StyleSheet.create({
   serviceCard: {
-    width: "48%",
+    width: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "90%" : "48%",
     backgroundColor: "#f8f9fa",
-    padding: 20,
+    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 20,
     borderRadius: 12,
     marginBottom: 16,
     alignItems: "center",
+    marginHorizontal: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 5 : 0,
   },
   serviceIcon: {
-    fontSize: 32,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 28 : 32,
     marginBottom: 12,
   },
   serviceTitle: {
-    fontSize: 18,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 18,
     fontWeight: "700",
     color: "#212529",
     marginBottom: 8,
   },
   serviceDesc: {
-    fontSize: 14,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 12 : 14,
     color: "#6c757d",
     textAlign: "center",
-    lineHeight: 20,
+    lineHeight: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 16 : 20,
   },
 });

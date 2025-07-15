@@ -3,6 +3,7 @@ import HeroSection from "../../components/HeroSection";
 import Service from "../../components/ServicesSection";
 import Stat from "../../components/StatsSection";
 import PleaSection from "../../components/PleaSection";
+import ContactLink from "../../components/ContactLink";
 
 const openLink = (url) => {
   if (Platform.OS === 'web') {
@@ -59,18 +60,25 @@ export default function Index() {
       {/* Contact Section */}
       <View style={styles.contactSection}>
         <Text style={styles.contactTitle}>Get In Touch</Text>
-        <Text style={styles.contactSubtitle}>Let's grab a drink 🍺</Text>
-        <TouchableOpacity onPress={() => openLink("https://linkedin.com/in/joseph-hill-017903255")}>
-          <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>LinkedIn: joseph-hill-017903255</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => openLink("https://instagram.com/joehill06")}>
-          <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>Instagram: @joehill06</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => openLink("https://github.com/joehill06")}>
-          <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>GitHub: @joehill06</Text>
-        </TouchableOpacity>
+        <Text style={styles.contactSubtitle}>Let&apos;s grab a drink 🍺</Text>
+        
+        <ContactLink 
+          name="LinkedIn"
+          imageSource={require("../../assets/images/LinkedIn.png")}
+          url="https://linkedin.com/in/joseph-hill-017903255"
+        />
+        
+        <ContactLink 
+          name="Instagram"
+          imageSource={require("../../assets/images/Instagram_icon.png")}
+          url="https://instagram.com/joehill06"
+        />
+        
+        <ContactLink 
+          name="GitHub"
+          imageSource={require("../../assets/images/git_hub.webp")}
+          url="https://github.com/joehill06"
+        />
         
       </View>
 
@@ -88,50 +96,51 @@ const styles = StyleSheet.create({
   },
   servicesSection: {
     backgroundColor: "#ffffff",
-    padding: 40,
+    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
     marginTop: 2,
   },
   sectionTitle: {
-    fontSize: 32,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32,
     fontWeight: "800",
     color: "#212529",
-    marginBottom: 40,
+    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
     textAlign: "center",
   },
   servicesGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "space-between",
   },
   statsSection: {
     backgroundColor: "#212529",
-    padding: 40,
+    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
     marginTop: 2,
   },
   statsContent: {
     alignItems: "center",
   },
   statsTitle: {
-    fontSize: 32,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32,
     fontWeight: "800",
     color: "#ffffff",
-    marginBottom: 40,
+    marginBottom: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
     textAlign: "center",
   },
   statsGrid: {
-    flexDirection: "row",
+    flexDirection: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "column" : "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
     width: "100%",
+    alignItems: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "stretch",
   },
   contactSection: {
     backgroundColor: "#ffffff",
-    padding: 40,
+    padding: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 20 : 40,
     marginTop: 2,
     alignItems: "center",
   },
   contactTitle: {
-    fontSize: 32,
+    fontSize: Platform.OS === 'web' && typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32,
     fontWeight: "800",
     color: "#212529",
     marginBottom: 10,
