@@ -1,10 +1,18 @@
-import { ScrollView, View, Text, StyleSheet, Alert, Linking, Platform } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Alert, Linking, Platform, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import HeroSection from "../../components/HeroSection";
 import Service from "../../components/ServicesSection";
 import Stat from "../../components/StatsSection";
 import PleaSection from "../../components/PleaSection";
 import Contact from "../../components/ContactSection";
+
+const openLink = (url) => {
+  if (Platform.OS === 'web') {
+    window.open(url, '_blank');
+  } else {
+    Linking.openURL(url);
+  }
+};
 
 const openStripePayment = () => {
   const url = "https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00";
@@ -71,9 +79,17 @@ export default function Index() {
       <View style={styles.contactSection}>
         <Text style={styles.contactTitle}>Get In Touch</Text>
         <Text style={styles.contactSubtitle}>Let's grab a drink 🍺</Text>
-        <Contact type="LinkedIn" text="http://linkedin.com/in/joseph-hill-017903255" />
-        <Contact type="instagram" text="@joehill06" />
-        <Contact type="github" text="@joehill06" />
+        <TouchableOpacity onPress={() => openLink("https://linkedin.com/in/joseph-hill-017903255")}>
+          <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>LinkedIn: joseph-hill-017903255</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => openLink("https://instagram.com/joehill06")}>
+          <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>Instagram: @joehill06</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => openLink("https://github.com/joehill06")}>
+          <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>GitHub: @joehill06</Text>
+        </TouchableOpacity>
         
       </View>
 
