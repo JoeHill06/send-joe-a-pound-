@@ -15,51 +15,37 @@ const openLink = (url) => {
 };
 
 const DonateButton = () => {
+  const handlePress = () => {
+    if (Platform.OS === 'web') {
+      window.open("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00", "_blank");
+    } else {
+      Linking.openURL("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00");
+    }
+  };
+
   return (
-    <View style={{ marginTop: 20, alignItems: 'center' }}>
-      {Platform.OS === 'web' ? (
-        <a
-          href="https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ textDecoration: 'none' }}
-        >
-          <button
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#1e90ff',
-              color: 'white',
-              fontSize: '18px',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer'
-            }}
-          >
-            Donate £1
-          </button>
-        </a>
-      ) : (
-        <TouchableOpacity
-          onPress={() => Linking.openURL('https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00')}
-          style={{
-            backgroundColor: '#1e90ff',
-            padding: 12,
-            borderRadius: 8
-          }}
-        >
-          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>
-            Donate £1
-          </Text>
-        </TouchableOpacity>
-      )}
-    </View>
+    <TouchableOpacity
+      onPress={handlePress}
+      style={{
+        backgroundColor: '#1e90ff',
+        padding: 16,
+        borderRadius: 10,
+        marginTop: 30,
+        alignSelf: 'center'
+      }}
+    >
+      <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>Donate £1</Text>
+    </TouchableOpacity>
   );
 };
 
 export default function Index() {
   const handleDonatePress = () => {
-    // Unused now but kept in case it's passed to components
-    openLink("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00");
+    if (Platform.OS === 'web') {
+      window.open("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00", "_blank");
+    } else {
+      Linking.openURL("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00");
+    }
   };
 
   return (
