@@ -2,12 +2,15 @@
   "name": "send-joe-a-pound-web",
   "main": "expo-router/entry",
   "version": "1.0.0",
+  "homepage": "https://<your-username>.github.io/send-joe-a-pound-web",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "predeploy": "npx expo export:web",
+    "deploy":   "gh-pages -d dist",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -42,7 +45,8 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "eslint": "^9.25.0",
-    "eslint-config-expo": "~9.2.0"
+    "eslint-config-expo": "~9.2.0",
+    "gh-pages": "^6.3.0"
   },
   "private": true
 }
