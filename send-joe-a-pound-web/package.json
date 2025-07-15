@@ -11,7 +11,7 @@
   "web": "expo start --web",
   "lint": "expo lint",
   "predeploy": "npx expo export --platform web",
-  "deploy": "gh-pages -d dist"
+  "deploy": "gh-pages -d dist -r https://github.com/JoeHill06/send-joe-a-pound-.git"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
