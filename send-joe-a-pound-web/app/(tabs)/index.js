@@ -14,35 +14,62 @@ const openLink = (url) => {
   }
 };
 
-const openStripePayment = () => {
-  const url = "https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00";
-  
-  if (Platform.OS === 'web') {
-    // For web, use window.open for better compatibility
-    window.open(url, '_blank');
-  } else {
-    // For mobile, use Linking
-    Linking.openURL(url);
-  }
+const DonateButton = () => {
+  return (
+    <View style={{ marginTop: 20, alignItems: 'center' }}>
+      {Platform.OS === 'web' ? (
+        <a
+          href="https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: 'none' }}
+        >
+          <button
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#1e90ff',
+              color: 'white',
+              fontSize: '18px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer'
+            }}
+          >
+            Donate £1
+          </button>
+        </a>
+      ) : (
+        <TouchableOpacity
+          onPress={() => Linking.openURL('https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00')}
+          style={{
+            backgroundColor: '#1e90ff',
+            padding: 12,
+            borderRadius: 8
+          }}
+        >
+          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>
+            Donate £1
+          </Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  );
 };
 
 export default function Index() {
   const handleDonatePress = () => {
-    openStripePayment();
+    // Unused now but kept in case it's passed to components
+    openLink("https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00");
   };
-
-
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      
       <HeroSection 
         subtitle="A broke software engineer enjoying summer holidays"
         description="I love going to the pub, seeing friends, playing tennis and golf. Sadly also enjoy coding and avoiding job hunting. Currently broke but having the time of my life!"
         onButtonPress={handleDonatePress}
       />
 
-      {/* Services Section */}
       <View style={styles.servicesSection}>
         <Text style={styles.sectionTitle}>What I Do For Fun</Text>
         <View style={styles.servicesGrid}>
@@ -54,7 +81,6 @@ export default function Index() {
         </View>
       </View>
 
-      {/* Stats Section */}
       <View style={styles.statsSection}>
         <View style={styles.statsContent}>
           <Text style={styles.statsTitle}>My Summer Stats</Text>
@@ -75,10 +101,12 @@ export default function Index() {
         onButtonPress={handleDonatePress}
       />
 
-      {/* Contact Section */}
+      <DonateButton />
+
       <View style={styles.contactSection}>
         <Text style={styles.contactTitle}>Get In Touch</Text>
         <Text style={styles.contactSubtitle}>Let's grab a drink 🍺</Text>
+
         <TouchableOpacity onPress={() => openLink("https://linkedin.com/in/joseph-hill-017903255")}>
           <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>LinkedIn: joseph-hill-017903255</Text>
         </TouchableOpacity>
@@ -90,11 +118,7 @@ export default function Index() {
         <TouchableOpacity onPress={() => openLink("https://github.com/joehill06")}>
           <Text style={{ fontSize: 18, color: "#1e90ff", marginBottom: 10 }}>GitHub: @joehill06</Text>
         </TouchableOpacity>
-        
       </View>
-
-      
-
     </ScrollView>
   );
 }
