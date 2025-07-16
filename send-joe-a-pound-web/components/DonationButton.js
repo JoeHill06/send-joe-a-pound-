@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, Platform, Linking } from 'react-native';
+import React from 'react';
 
 const DonationButton = ({ 
   text = "Donate £1", 
@@ -8,56 +8,61 @@ const DonationButton = ({
 }) => {
   const url = "https://buy.stripe.com/cNi3cubpN7CH4J60BjaIM00";
 
-  const handlePress = () => {
-    if (Platform.OS !== 'web') {
-      Linking.openURL(url);
-    }
-  };
-
-  if (Platform.OS === 'web') {
-    const isExtraSmall = typeof window !== 'undefined' && window.innerWidth < 400;
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    return (
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .donation-button {
+            background-color: ${backgroundColor};
+            color: ${textColor};
+            padding: 16px 32px;
+            border-radius: 10px;
+            margin-top: ${marginTop}px;
+            border: none;
+            font-size: 20px;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          }
+          
+          .donation-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          }
+          
+          .donation-button:active {
+            transform: translateY(0);
+          }
+          
+          @media (max-width: 768px) {
+            .donation-button {
+              padding: 12px 24px;
+              font-size: 16px;
+            }
+          }
+          
+          @media (max-width: 400px) {
+            .donation-button {
+              padding: 10px 20px;
+              font-size: 14px;
+            }
+          }
+        `
+      }} />
       <a
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        style={{
-          backgroundColor: backgroundColor,
-          color: textColor,
-          padding: isExtraSmall ? '10px 20px' : (isMobile ? '12px 24px' : '16px 32px'),
-          borderRadius: '10px',
-          marginTop: marginTop,
-          border: 'none',
-          fontSize: isExtraSmall ? '14px' : (isMobile ? '16px' : '20px'),
-          fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          textDecoration: 'none',
-          display: 'inline-block',
-          textAlign: 'center'
-        }}
+        className="donation-button"
       >
         {text}
       </a>
-    );
-  }
-
-  return (
-    <TouchableOpacity
-      onPress={handlePress}
-      style={{
-        backgroundColor: backgroundColor,
-        padding: 16,
-        borderRadius: 10,
-        marginTop: marginTop,
-        alignSelf: 'center'
-      }}
-    >
-      <Text style={{ color: textColor, fontSize: 20, fontWeight: 'bold' }}>
-        {text}
-      </Text>
-    </TouchableOpacity>
+    </>
   );
 };
 

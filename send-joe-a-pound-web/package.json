@@ -2,7 +2,7 @@
   "name": "send-joe-a-pound-web",
   "main": "expo-router/entry",
   "version": "1.0.0",
-  "homepage": "https://<your-username>.github.io/send-joe-a-pound-web",
+  "homepage": "https://joehill06.github.io/send-joe-a-pound-/",
   "scripts": {
   "start": "expo start",
   "reset-project": "node ./scripts/reset-project.js",

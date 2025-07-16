@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Platform } from "react-native";
 
 export default function PhotoTile({ name, description, imageSource, backgroundColor = "#f0fff0", style, isHeroPhoto = false }) {
-  if (Platform.OS === 'web' && isHeroPhoto) {
+  if (isHeroPhoto) {
     return (
       <>
         <style dangerouslySetInnerHTML={{
@@ -13,10 +12,11 @@ export default function PhotoTile({ name, description, imageSource, backgroundCo
               display: flex;
               justify-content: center;
               align-items: center;
-              width: 180px;
-              height: 180px;
+              width: 186px;
+              height: 186px;
               border-radius: 50%;
-              overflow: hidden;
+              background-color: #ff6b35;
+              padding: 3px;
             }
             
             .hero-photo-image {
@@ -24,9 +24,10 @@ export default function PhotoTile({ name, description, imageSource, backgroundCo
               height: 180px;
               border-radius: 90px;
               object-fit: cover;
-              border: 3px solid #ff6b35;
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
               transition: transform 0.3s ease, box-shadow 0.3s ease;
+              position: relative;
+              z-index: 1;
             }
             
             .hero-photo-image:hover {
@@ -60,17 +61,18 @@ export default function PhotoTile({ name, description, imageSource, backgroundCo
             
             @media (max-width: 768px) {
               .hero-photo-container {
-                width: 120px !important;
-                height: 120px !important;
+                width: 124px !important;
+                height: 124px !important;
                 margin: 0 auto !important;
                 align-self: center !important;
+                background-color: #ff6b35 !important;
+                padding: 2px !important;
               }
               
               .hero-photo-image {
                 width: 120px !important;
                 height: 120px !important;
                 border-radius: 60px !important;
-                border: 3px solid #ff6b35 !important;
                 box-shadow: 0 8px 20px rgba(255, 107, 53, 0.25) !important;
                 transform: none !important;
               }
@@ -99,17 +101,18 @@ export default function PhotoTile({ name, description, imageSource, backgroundCo
             
             @media (max-width: 400px) {
               .hero-photo-container {
-                width: 100px !important;
-                height: 100px !important;
+                width: 102px !important;
+                height: 102px !important;
                 margin: 0 auto !important;
                 align-self: center !important;
+                background-color: #ff6b35 !important;
+                padding: 1px !important;
               }
               
               .hero-photo-image {
                 width: 100px !important;
                 height: 100px !important;
                 border-radius: 50px !important;
-                border: 3px solid #ff6b35 !important;
                 box-shadow: 0 10px 25px rgba(255, 107, 53, 0.35) !important;
                 transform: none !important;
               }
@@ -140,16 +143,9 @@ export default function PhotoTile({ name, description, imageSource, backgroundCo
         <div className="hero-photo-container">
           {imageSource ? (
             <img 
-              src={imageSource.default || imageSource.uri || imageSource}
+              src={typeof imageSource === 'string' ? imageSource : (imageSource.default || imageSource.uri || imageSource)}
               className="hero-photo-image"
-              style={{
-                border: '3px solid #ff6b35',
-                borderRadius: '50%',
-                width: '180px',
-                height: '180px',
-                objectFit: 'cover'
-              }}
-              alt="Profile" 
+              alt="" 
             />
           ) : (
             <div className="hero-photo-placeholder">
@@ -162,113 +158,51 @@ export default function PhotoTile({ name, description, imageSource, backgroundCo
     );
   }
 
+  // Regular photo tile (non-hero)
   return (
-    <View style={[styles.container, { backgroundColor }, style]}>
-      <View style={isHeroPhoto ? styles.heroImageContainer : styles.imageContainer}>
+    <div style={{
+      padding: '20px',
+      margin: '10px',
+      borderRadius: '15px',
+      display: 'flex',
+      alignItems: 'center',
+      minHeight: '120px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      backgroundColor: backgroundColor
+    }}>
+      <div style={{ marginRight: '15px' }}>
         {imageSource ? (
-          <Image source={imageSource} style={isHeroPhoto ? styles.heroImage : styles.image} />
+          <img 
+            src={typeof imageSource === 'string' ? imageSource : (imageSource.default || imageSource.uri || imageSource)}
+            style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '40px',
+              objectFit: 'cover'
+            }}
+            alt="Profile"
+          />
         ) : (
-          <View style={isHeroPhoto ? styles.heroPlaceholderImage : styles.placeholderImage}>
-            <Text style={isHeroPhoto ? styles.heroPlaceholderText : styles.placeholderText}>📸</Text>
-            <Text style={isHeroPhoto ? styles.heroPlaceholderSubtext : styles.placeholderSubtext}>
-              {isHeroPhoto ? "Your photo here" : "Add your photo here!"}
-            </Text>
-          </View>
+          <div style={{
+            width: '80px',
+            height: '80px',
+            borderRadius: '40px',
+            backgroundColor: '#e0e0e0',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            border: '2px dashed #ccc'
+          }}>
+            <span style={{ fontSize: '24px' }}>📸</span>
+            <span style={{ fontSize: '10px', color: '#666', textAlign: 'center' }}>Add your photo here!</span>
+          </div>
         )}
-      </View>
-      {!isHeroPhoto && (
-        <View style={styles.textContainer}>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.description}>{description}</Text>
-        </View>
-      )}
-    </View>
+      </div>
+      <div style={{ flex: 1 }}>
+        <h3 style={{ fontSize: '22px', fontWeight: 'bold', color: '#333', marginBottom: '8px' }}>{name}</h3>
+        <p style={{ fontSize: '16px', lineHeight: '22px', color: '#555' }}>{description}</p>
+      </div>
+    </div>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    margin: 10,
-    borderRadius: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    minHeight: 120,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  imageContainer: {
-    marginRight: 15,
-  },
-  image: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-  },
-  placeholderImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "#e0e0e0",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: "#ccc",
-    borderStyle: "dashed",
-  },
-  placeholderText: {
-    fontSize: 24,
-  },
-  placeholderSubtext: {
-    fontSize: 10,
-    color: "#666",
-    textAlign: "center",
-    marginTop: 2,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  name: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 8,
-  },
-  description: {
-    fontSize: 16,
-    lineHeight: 22,
-    color: "#555",
-  },
-  // Hero-specific styles (for native)
-  heroImageContainer: {
-    alignSelf: "center",
-  },
-  heroImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-  },
-  heroPlaceholderImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    backgroundColor: "#e9ecef",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 3,
-    borderColor: "#ff6b35",
-    borderStyle: "dashed",
-  },
-  heroPlaceholderText: {
-    fontSize: 32,
-  },
-  heroPlaceholderSubtext: {
-    fontSize: 12,
-    color: "#6c757d",
-    textAlign: "center",
-    marginTop: 5,
-  },
-});

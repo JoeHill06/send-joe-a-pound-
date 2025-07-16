@@ -1,39 +1,67 @@
-import { Platform, Image } from 'react-native';
+import React from 'react';
 
 export default function ContactLink({ name, imageSource, url }) {
-  if (Platform.OS === 'web') {
-    const isExtraSmall = typeof window !== 'undefined' && window.innerWidth < 400;
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    
-    return (
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .contact-link {
+            color: #1e90ff;
+            margin-bottom: 10px;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+          }
+          
+          .contact-link:hover {
+            color: #0066cc;
+          }
+          
+          .contact-link img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+          }
+          
+          @media (max-width: 768px) {
+            .contact-link {
+              font-size: 16px;
+            }
+            
+            .contact-link img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+          
+          @media (max-width: 400px) {
+            .contact-link {
+              font-size: 14px;
+            }
+            
+            .contact-link img {
+              width: 18px;
+              height: 18px;
+            }
+          }
+        `
+      }} />
       <a
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        style={{
-          fontSize: isExtraSmall ? '14px' : (isMobile ? '16px' : '18px'),
-          color: '#1e90ff',
-          marginBottom: '10px',
-          fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
-          textDecoration: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}
+        className="contact-link"
       >
         <img 
-          src={imageSource.default || imageSource.uri || imageSource}
-          style={{
-            width: isExtraSmall ? 18 : (isMobile ? 20 : 24),
-            height: isExtraSmall ? 18 : (isMobile ? 20 : 24),
-            objectFit: 'contain'
-          }}
+          src={typeof imageSource === 'string' ? imageSource : (imageSource.default || imageSource.uri || imageSource)}
+          alt={name}
         />
         {name}
       </a>
-    );
-  }
-
-  // For native platforms, you might want to use Linking
-  return null;
+    </>
+  );
 }
