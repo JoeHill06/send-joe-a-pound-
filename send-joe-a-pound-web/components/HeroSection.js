@@ -67,10 +67,11 @@ export default function HeroSection({
             }
             
             .responsive-hero-shape {
-              width: 200px;
-              height: 200px;
+              width: 250px;
+              height: 250px;
               position: relative;
               flex-shrink: 0;
+              margin-left: 100px;
             }
             
             @media (max-width: 768px) {
@@ -108,6 +109,12 @@ export default function HeroSection({
                 width: 140px !important;
                 height: 140px !important;
                 order: -1 !important;
+                margin-left: 0 !important;
+                margin-bottom: 10px !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                align-self: center !important;
               }
             }
             
@@ -147,6 +154,15 @@ export default function HeroSection({
               .responsive-hero-shape {
                 width: 120px !important;
                 height: 120px !important;
+                margin-left: 0 !important;
+                margin-bottom: 15px !important;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+                border-radius: 16px !important;
+                overflow: hidden !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                align-self: center !important;
               }
             }
           `

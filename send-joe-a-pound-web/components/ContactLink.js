@@ -21,8 +21,8 @@ export default function ContactLink({ name, imageSource, url }) {
           gap: '8px'
         }}
       >
-        <Image 
-          source={imageSource}
+        <img 
+          src={imageSource.default || imageSource.uri || imageSource}
           style={{
             width: isExtraSmall ? 18 : (isMobile ? 20 : 24),
             height: isExtraSmall ? 18 : (isMobile ? 20 : 24),

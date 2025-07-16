@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, Linking, Platform, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Platform } from "react-native";
 import { Stack } from "expo-router";
 import HeroSection from "../../components/HeroSection";
 import Service from "../../components/ServicesSection";
@@ -7,13 +7,6 @@ import PleaSection from "../../components/PleaSection";
 import ContactLink from "../../components/ContactLink";
 
 
-const openLink = (url) => {
-  if (Platform.OS === 'web') {
-    window.open(url, '_blank');
-  } else {
-    Linking.openURL(url);
-  }
-};
 
 export default function Index() {
 
